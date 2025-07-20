@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinShield - Financial Literacy</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --danger: #e63946;
+            --success: #2a9d8f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-selector {
+            margin-right: 1rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: none;
+            background-color: white;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .auth-buttons button {
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white !important;
+        }
+        
+        .register-btn {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Page Content */
+        .page {
+            display: none;
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Home Page */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .cta-buttons button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .primary-btn {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .secondary-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        /* Features Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        /* Fraud Awareness Page */
+        .fraud-types {
+            background-color: #f1f3ff;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        
+        .fraud-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .fraud-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--danger);
+        }
+        
+        .fraud-card h3 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Learning Module Page */
+        .module-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .module-content h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .module-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        /* Quiz Page */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-progress {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .quiz-question {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-options {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-option {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .quiz-option.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .quiz-button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-button:hover {
+            background-color: var(--secondary);
+        }
+        
+        .quiz-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        /* Calculator Page */
+        .calculator {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .calculator h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .calculator-form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .calculator-result {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f1f3ff;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .calculator-result h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            
+            .nav-links, .header-right {
+                margin-top: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons button {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" onclick="showPage('home')">FinShield</div>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showPage('home')" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#" onclick="showPage('learning')" data-i18n="nav.learning">Financial Literacy</a></li>
+                    <li><a href="#" onclick="showPage('fraud')" data-i18n="nav.fraud">Fraud Awareness</a></li>
+                    <li><a href="#" onclick="showPage('quiz')" data-i18n="nav.quiz">Quiz</a></li>
+                    <li><a href="#" onclick="showPage('calculator')" data-i18n="nav.calculator">Calculators</a></li>
+                </ul>
+                <div class="header-right">
+                    <select class="language-selector" id="languageSelector" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी (Hindi)</option>
+                        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+                    </select>
+                    <div class="auth-buttons">
+                        <button class="login-btn" data-i18n="nav.login">Login</button>
+                        <button class="register-btn" data-i18n="nav.register">Register</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h1 data-i18n="home.title">Empower Your Financial Future</h1>
+                <p data-i18n="home.subtitle">Learn essential money management skills and protect yourself from financial fraud with our interactive educational platform.</p>
+                <div class="cta-buttons">
+                    <button class="primary-btn" onclick="showPage('learning')" data-i18n="home.cta1">Start Learning</button>
+                    <button class="secondary-btn" onclick="showPage('quiz')" data-i18n="home.cta2">Take Fraud Quiz</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container" style="margin-top: 4rem;">
+            <div class="section-title">
+                <h2 data-i18n="home.features_title">Financial Literacy Modules</h2>
+                <p data-i18n="home.features_subtitle">Master your personal finances with our interactive lessons</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showModule('budgeting')">
+                    <div class="feature-icon">💰</div>
+                    <h3 data-i18n="modules.budgeting.title">Budgeting Basics</h3>
+                    <p data-i18n="modules.budgeting.desc">Learn how to create and stick to a budget that works for your lifestyle and financial goals.</p>
+                </div>
+                <div class="feature-card" onclick="showModule('saving')">
+                    <div class="feature-icon">🏦</div>
+                    <h3 data-i18n="modules.saving.title">Saving Strategies</h3>
+                    <p data-i18n="modules.saving.desc">Discover techniques to grow your savings effectively and build financial security.</p>
+                </div>
+                <div class="feature-card" onclick="showModule('investing')">
+                    <div class="feature-icon">📈</div>
+                    <h3 data-i18n="modules.investing.title">Investment Fundamentals</h3>
+                    <p data-i18n="modules.investing.desc">Understand different investment options and how to make your money work for you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Learning Modules Page -->
+    <section id="learning" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="learning.title">Financial Literacy Modules</h2>
+                <p data-i18n="learning.subtitle">Select a module to begin learning</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showModule('budgeting')">
+                    <div class="feature-icon">💰</div>
+                    <h3 data-i18n="modules.budgeting.title">Budgeting Basics</h3>
+                    <p data-i18n="modules.budgeting.desc">Learn how to create and stick to a budget that works for your lifestyle and financial goals.</p>
+                </div>
+                <div class="feature-card" onclick="showModule('saving')">
+                    <div class="feature-icon">🏦</div>
+                    <h3 data-i18n="modules.saving.title">Saving Strategies</h3>
+                    <p data-i18n="modules.saving.desc">Discover techniques to grow your savings effectively and build financial security.</p>
+                </div>
+                <div class="feature-card" onclick="showModule('investing')">
+                    <div class="feature-icon">📈</div>
+                    <h3 data-i18n="modules.investing.title">Investment Fundamentals</h3>
+                    <p data-i18n="modules.investing.desc">Understand different investment options and how to make your money work for you.</p>
+                </div>
+                <div class="feature-card" onclick="showModule('tax')">
+                    <div class="feature-icon">🧾</div>
+                    <h3 data-i18n="modules.tax.title">Tax Planning</h3>
+                    <p data-i18n="modules.tax.desc">Learn how to optimize your taxes and keep more of your hard-earned money.</p>
+                </div>
+                <div class="feature-card" onclick="showModule('home')">
+                    <div class="feature-icon">🏠</div>
+                    <h3 data-i18n="modules.home.title">Home Ownership</h3>
+                    <p data-i18n="modules.home.desc">Navigate the process of buying and maintaining a home without financial stress.</p>
+                </div>
+                <div class="feature-card" onclick="showModule('retirement')">
+                    <div class="feature-icon">👵</div>
+                    <h3 data-i18n="modules.retirement.title">Retirement Planning</h3>
+                    <p data-i18n="modules.retirement.desc">Start preparing for your golden years with smart retirement strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Module Content Pages -->
+    <section id="module-budgeting" class="page">
+        <div class="container">
+            <button onclick="showPage('learning')" class="quiz-button" data-i18n="button.back">Back to Modules</button>
+            <div class="module-content">
+                <h2 data-i18n="modules.budgeting.title">Budgeting Basics</h2>
+                <p data-i18n="modules.budgeting.content1">Budgeting is the foundation of personal finance. It's about understanding how much money you have coming in and where it's going out.</p>
+                
+                <h3 data-i18n="modules.budgeting.subtitle1">The 50/30/20 Rule</h3>
+                <p data-i18n="modules.budgeting.content2">A simple budgeting method where you allocate:</p>
+                <ul>
+                    <li data-i18n="modules.budgeting.rule1">50% of income to needs (rent, food, utilities)</li>
+                    <li data-i18n="modules.budgeting.rule2">30% to wants (entertainment, dining out)</li>
+                    <li data-i18n="modules.budgeting.rule3">20% to savings and debt repayment</li>
+                </ul>
+                
+                <h3 data-i18n="modules.budgeting.subtitle2">Budgeting Tools</h3>
+                <p data-i18n="modules.budgeting.content3">Consider using budgeting apps or simple spreadsheets to track your expenses. The key is consistency.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="module-saving" class="page">
+        <div class="container">
+            <button onclick="showPage('learning')" class="quiz-button" data-i18n="button.back">Back to Modules</button>
+            <div class="module-content">
+                <h2 data-i18n="modules.saving.title">Saving Strategies</h2>
+                <p data-i18n="modules.saving.content1">Building savings is crucial for financial security and achieving your life goals.</p>
+                
+                <h3 data-i18n="modules.saving.subtitle1">Pay Yourself First</h3>
+                <p data-i18n="modules.saving.content2">Automatically transfer a portion of every paycheck to savings before you spend on anything else.</p>
+                
+                <h3 data-i18n="modules.saving.subtitle2">Emergency Fund</h3>
+                <p data-i18n="modules.saving.content3">Aim to save 3-6 months' worth of living expenses for unexpected situations like job loss or medical emergencies.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Fraud Awareness Page -->
+    <section id="fraud" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="fraud.title">Fraud Awareness</h2>
+                <p data-i18n="fraud.subtitle">Recognize and protect yourself from common financial scams</p>
+            </div>
+            <div class="fraud-types">
+                <div class="fraud-grid">
+                    <div class="fraud-card">
+                        <h3 data-i18n="fraud.phishing.title">Phishing Scams</h3>
+                        <p data-i18n="fraud.phishing.desc">Fraudulent attempts to obtain sensitive information by pretending to be a trustworthy entity.</p>
+                        <button class="quiz-button" style="margin-top: 1rem;" onclick="showFraudDetail('phishing')" data-i18n="button.learn_more">Learn More</button>
+                    </div>
+                    <div class="fraud-card">
+                        <h3 data-i18n="fraud.ponzi.title">Ponzi Schemes</h3>
+                        <p data-i18n="fraud.ponzi.desc">Fraudulent investment operations paying returns to earlier investors with new investors' money.</p>
+                        <button class="quiz-button" style="margin-top: 1rem;" onclick="showFraudDetail('ponzi')" data-i18n="button.learn_more">Learn More</button>
+                    </div>
+                    <div class="fraud-card">
+                        <h3 data-i18n="fraud.identity.title">Identity Theft</h3>
+                        <p data-i18n="fraud.identity.desc">Stealing personal information to commit fraud or theft in your name.</p>
+                        <button class="quiz-button" style="margin-top: 1rem;" onclick="showFraudDetail('identity')" data-i18n="button.learn_more">Learn More</button>
+                    </div>
+                    <div class="fraud-card">
+                        <h3 data-i18n="fraud.credit.title">Credit Card Fraud</h3>
+                        <p data-i18n="fraud.credit.desc">Unauthorized use of credit card information to make purchases or withdraw funds.</p>
+                        <button class="quiz-button" style="margin-top: 1rem;" onclick="showFraudDetail('credit')" data-i18n="button.learn_more">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Fraud Detail Pages -->
+    <section id="fraud-phishing" class="page">
+        <div class="container">
+            <button onclick="showPage('fraud')" class="quiz-button" data-i18n="button.back">Back to Fraud Types</button>
+            <div class="module-content">
+                <h2 data-i18n="fraud.phishing.title">Phishing Scams</h2>
+                <p data-i18n="fraud.phishing.content1">Phishing is when scammers try to trick you into giving out personal information such as your bank account numbers, passwords, and credit card numbers.</p>
+                
+                <h3 data-i18n="fraud.phishing.subtitle1">How to Recognize Phishing</h3>
+                <ul>
+                    <li data-i18n="fraud.phishing.recognize1">Urgent or threatening language in emails/messages</li>
+                    <li data-i18n="fraud.phishing.recognize2">Requests for personal information</li>
+                    <li data-i18n="fraud.phishing.recognize3">Links to suspicious websites</li>
+                    <li data-i18n="fraud.phishing.recognize4">Spelling and grammar mistakes</li>
+                </ul>
+                
+                <h3 data-i18n="fraud.phishing.subtitle2">Protection Tips</h3>
+                <ul>
+                    <li data-i18n="fraud.phishing.tip1">Never click links in suspicious emails</li>
+                    <li data-i18n="fraud.phishing.tip2">Always verify the sender's email address</li>
+                    <li data-i18n="fraud.phishing.tip3">Use two-factor authentication</li>
+                    <li data-i18n="fraud.phishing.tip4">Keep your software updated</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quiz Page -->
+    <section id="quiz" class="page">
+        <div class="container">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2 data-i18n="quiz.title">Fraud Awareness Quiz</h2>
+                    <div class="quiz-progress" id="quizProgress" data-i18n="quiz.progress">Question 1 of 5</div>
+                </div>
+                
+                <div id="quizContent">
+                    <div class="quiz-question" id="quizQuestion" data-i18n="quiz.q1.question">What should you do if you receive an email asking for your banking details from what appears to be your bank?</div>
+                    <div class="quiz-options" id="quizOptions">
+                        <div class="quiz-option" onclick="selectQuizOption(this, 0)" data-i18n="quiz.q1.option1">Reply with the requested information</div>
+                        <div class="quiz-option" onclick="selectQuizOption(this, 1)" data-i18n="quiz.q1.option2">Click on any links in the email to verify</div>
+                        <div class="quiz-option" onclick="selectQuizOption(this, 2)" data-i18n="quiz.q1.option3">Contact your bank directly using their official number</div>
+                        <div class="quiz-option" onclick="selectQuizOption(this, 3)" data-i18n="quiz.q1.option4">Forward the email to all your contacts to warn them</div>
+                    </div>
+                    <button class="quiz-button" id="quizNextBtn" onclick="nextQuizQuestion()" disabled data-i18n="button.next">Next Question</button>
+                </div>
+                
+                <div id="quizResult" style="display: none;">
+                    <h2 data-i18n="quiz.result.title">Quiz Results</h2>
+                    <p id="quizScore" data-i18n="quiz.result.score">You scored 3 out of 5!</p>
+                    <p id="quizFeedback" data-i18n="quiz.result.feedback">Good job! You have basic fraud awareness knowledge.</p>
+                    <button class="quiz-button" onclick="resetQuiz()" data-i18n="button.try_again">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Calculator Page -->
+    <section id="calculator" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="calculator.title">Financial Calculators</h2>
+                <p data-i18n="calculator.subtitle">Plan your financial future with our interactive tools</p>
+            </div>
+            
+            <div class="calculator">
+                <h2 data-i18n="calculator.retirement.title">Retirement Calculator</h2>
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="currentAge" data-i18n="calculator.retirement.current_age">Current Age</label>
+                        <input type="number" id="currentAge" min="18" max="100" value="30">
+                    </div>
+                    <div class="form-group">
+                        <label for="retirementAge" data-i18n="calculator.retirement.retirement_age">Retirement Age</label>
+                        <input type="number" id="retirementAge" min="40" max="100" value="65">
+                    </div>
+                    <div class="form-group">
+                        <label for="monthlySavings" data-i18n="calculator.retirement.monthly_savings">Monthly Savings (₹)</label>
+                        <input type="number" id="monthlySavings" min="100" value="5000">
+                    </div>
+                    <div class="form-group">
+                        <label for="expectedReturns" data-i18n="calculator.retirement.expected_returns">Expected Annual Returns (%)</label>
+                        <input type="range" id="expectedReturns" min="1" max="15" step="0.5" value="8">
+                        <span id="returnsValue">8%</span>
+                    </div>
+                    <button class="quiz-button" onclick="calculateRetirement()" data-i18n="button.calculate">Calculate</button>
+                </div>
+                
+                <div class="calculator-result" id="retirementResult">
+                    <h3 data-i18n="calculator.retirement.result_title">Estimated Retirement Corpus</h3>
+                    <p id="retirementAmount">₹0</p>
+                    <p data-i18n="calculator.retirement.result_note">This is an estimate based on your inputs. Actual results may vary.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo">FinShield</div>
+            <p data-i18n="footer.tagline">Your trusted partner in financial education and fraud prevention</p>
+            <ul class="footer-links">
+                <li><a href="#" onclick="showPage('home')" data-i18n="nav.home">Home</a></li>
+                <li><a href="#" onclick="showPage('learning')" data-i18n="nav.learning">Financial Literacy</a></li>
+                <li><a href="#" onclick="showPage('fraud')" data-i18n="nav.fraud">Fraud Awareness</a></li>
+                <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
+                <li><a href="#" data-i18n="footer.terms">Terms of Service</a></li>
+                <li><a href="#" data-i18n="footer.contact">Contact Us</a></li>
+            </ul>
+            <div class="copyright">
+                &copy; <span id="currentYear"></span> <span data-i18n="footer.copyright">FinShield. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Language Support
+        const translations = {
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.learning": "Financial Literacy",
+                "nav.fraud": "Fraud Awareness",
+                "nav.quiz": "Quiz",
+                "nav.calculator": "Calculators",
+                "nav.login": "Login",
+                "nav.register": "Register",
+                
+                // Home Page
+                "home.title": "Empower Your Financial Future",
+                "home.subtitle": "Learn essential money management skills and protect yourself from financial fraud with our interactive educational platform.",
+                "home.cta1": "Start Learning",
+                "home.cta2": "Take Fraud Quiz",
+                "home.features_title": "Financial Literacy Modules",
+                "home.features_subtitle": "Master your personal finances with our interactive lessons",
+                
+                // Modules
+                "modules.budgeting.title": "Budgeting Basics",
+                "modules.budgeting.desc": "Learn how to create and stick to a budget that works for your lifestyle and financial goals.",
+                "modules.budgeting.content1": "Budgeting is the foundation of personal finance. It's about understanding how much money you have coming in and where it's going out.",
+                "modules.budgeting.subtitle1": "The 50/30/20 Rule",
+                "modules.budgeting.content2": "A simple budgeting method where you allocate:",
+                "modules.budgeting.rule1": "50% of income to needs (rent, food, utilities)",
+                "modules.budgeting.rule2": "30% to wants (entertainment, dining out)",
+                "modules.budgeting.rule3": "20% to savings and debt repayment",
+                "modules.budgeting.subtitle2": "Budgeting Tools",
+                "modules.budgeting.content3": "Consider using budgeting apps or simple spreadsheets to track your expenses. The key is consistency.",
+                
+                "modules.saving.title": "Saving Strategies",
+                "modules.saving.desc": "Discover techniques to grow your savings effectively and build financial security.",
+                "modules.saving.content1": "Building savings is crucial for financial security and achieving your life goals.",
+                "modules.saving.subtitle1": "Pay Yourself First",
+                "modules.saving.content2": "Automatically transfer a portion of every paycheck to savings before you spend on anything else.",
+                "modules.saving.subtitle2": "Emergency Fund",
+                "modules.saving.content3": "Aim to save 3-6 months' worth of living expenses for unexpected situations like job loss or medical emergencies.",
+                
+                // Fraud Awareness
+                "fraud.title": "Fraud Awareness",
+                "fraud.subtitle": "Recognize and protect yourself from common financial scams",
+                "fraud.phishing.title": "Phishing Scams",
+                "fraud.phishing.desc": "Fraudulent attempts to obtain sensitive information by pretending to be a trustworthy entity.",
+                "fraud.phishing.content1": "Phishing is when scammers try to trick you into giving out personal information such as your bank account numbers, passwords, and credit card numbers.",
+                "fraud.phishing.subtitle1": "How to Recognize Phishing",
+                "fraud.phishing.recognize1": "Urgent or threatening language in emails/messages",
+                "fraud.phishing.recognize2": "Requests for personal information",
+                "fraud.phishing.recognize3": "Links to suspicious websites",
+                "fraud.phishing.recognize4": "Spelling and grammar mistakes",
+                "fraud.phishing.subtitle2": "Protection Tips",
+                "fraud.phishing.tip1": "Never click links in suspicious emails",
+                "fraud.phishing.tip2": "Always verify the sender's email address",
+                "fraud.phishing.tip3": "Use two-factor authentication",
+                "fraud.phishing.tip4": "Keep your software updated",
+                
+                // Quiz
+                "quiz.title": "Fraud Awareness Quiz",
+                "quiz.progress": "Question 1 of 5",
+                "quiz.q1.question": "What should you do if you receive an email asking for your banking details from what appears to be your bank?",
+                "quiz.q1.option1": "Reply with the requested information",
+                "quiz.q1.option2": "Click on any links in the email to verify",
+                "quiz.q1.option3": "Contact your bank directly using their official number",
+                "quiz.q1.option4": "Forward the email to all your contacts to warn them",
+                "quiz.result.title": "Quiz Results",
+                "quiz.result.score": "You scored 3 out of 5!",
+                "quiz.result.feedback": "Good job! You have basic fraud awareness knowledge.",
+                
+                // Calculator
+                "calculator.title": "Financial Calculators",
+                "calculator.subtitle": "Plan your financial future with our interactive tools",
+                "calculator.retirement.title": "Retirement Calculator",
+                "calculator.retirement.current_age": "Current Age",
+                "calculator.retirement.retirement_age": "Retirement Age",
+                "calculator.retirement.monthly_savings": "Monthly Savings (₹)",
+                "calculator.retirement.expected_returns": "Expected Annual

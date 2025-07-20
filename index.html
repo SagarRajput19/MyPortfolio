@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortFolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html" class="logo"><img
+                    src="https://cdn.pixabay.com/photo/2022/04/21/08/20/code-7146975_1280.png" alt="logo"></a>
+
+        </div>
+        <div class="navbar-center">
+            <ul class="navbar-center" id="nav">
+                <li><a href="#home" class="nav-link active-link"><i class="fas fa-home"></i><span> Home</span></a></li>
+                <li><a href="#win" class="nav-link"><i class="fas fa-trophy"></i><span> Winings</span></a></li>
+                <li><a href="#achv" class="nav-link"><i class="fas fa-award"></i><span> Achievements</span></a></li>
+                <li><a href="#projects" class="nav-link"><i class="fas fa-folder-open"></i><span> Projects</span></a>
+                </li>
+                <li><a href="#contactModal" class="nav-link" id="openContactModal"><i class="fas fa-envelope"></i>
+                        </i><span> Contact</span></a></li>
+            </ul>
+
+        </div>
+        <div class="navbar-right">
+            <div class="online">
+                <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg" class="nav-profile-img"
+                    onclick="toggleMenu()">
+            </div>
+
+        </div>
+        <!----Dropdown menu-->
+        <!-- <div class="profile-menu-wrap" id="profileMenu">
+            <div class="profile-menu">
+                <div class="user-info">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <div>
+                        <h3>Sagar</h3>
+                        <a href="#">See your profile</a>
+                    </div>
+                </div>
+                <hr>
+                <a href="#" class="profile-menu-link">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <p>Give Feedback</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="images/setting.png">
+                    <p>Settings & Privacy</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="images/help.png">
+                    <p>Help & Support</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="images/display.png">
+                    <p>Display & Accessibility</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="images/logout.png">
+                    <p>Logout</p>
+                    <span>></span>
+                </a>
+
+
+            </div>
+        </div> -->
+    </nav>
+    <!-- Modal -->
+    <div id="achievement-modal" class="ach-modal">
+        <span class="ach-close">&times;</span>
+        <img class="ach-modal-content" id="modal-img">
+    </div>
+
+
+    <div class="container">
+        <div class="left-sidebar">
+            <div class="sidebar-profile-box">
+                <img src="images\image.png" width="100%">
+                <div class="sidebar-profile-info">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg" id="my-img">
+                    <h1>Sagar</h1>
+                    <br>
+                    <h3>Welcome to my digital space where creativity meets functionality.
+                        Explore my work in design, development, and everything in between.
+                        Let's connect and build something amazing together.</h3>
+                    <ul>
+                        <li>Tech Events Joined<span> 37+</span></li>
+                        <li>Tech Event Won <span>25+</span></li>
+
+                    </ul>
+                </div>
+                <div class="sidebar-profile-link">
+                    <a href="https://www.linkedin.com/in/sagar-%E2%80%8E-0b91a128b/"><img src="images/logo.png"></a>
+                    <a href="https://github.com/SagarRajput19"><img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLsqn48N-8FOHQ1Vj6KErzdhogy05SXHBLRQ&s"></a>
+                </div>
+            </div>
+
+            <div class="sidebar-activity" id="sidebarActivity">
+
+                <div class="edu-container">
+                    <div class="edu-card-box">
+                        <span class="edu-ribbon"></span>
+                        <div class="edu-card-content">
+                            <h3>B.Tech</h3>
+                            <p>Information Technology</p>
+                            <p>CGPA: <strong>7.98</strong></p>
+                        </div>
+                        <div class="resume-btn-container">
+                            <a href="https://drive.google.com/file/d/1GYhagbTcF2FsA61v6w3jKwV1427daLO7/view?usp=sharing"
+                                download class="resume-btn">Download Resume</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h3>Projects</h3>
+                <a href="#"><img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTng6roie_8zGQGg62tObfCnU75efPUb0xmSAe2QvN4hYglk_HisSzbO7h6IiBarEOQ4r8&usqp=CAU">Study
+                    Material Web</a>
+                <a href="#"><img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTng6roie_8zGQGg62tObfCnU75efPUb0xmSAe2QvN4hYglk_HisSzbO7h6IiBarEOQ4r8&usqp=CAU">DineTap:
+                    Digital Menu </a>
+                <a href="#"><img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTng6roie_8zGQGg62tObfCnU75efPUb0xmSAe2QvN4hYglk_HisSzbO7h6IiBarEOQ4r8&usqp=CAU">Portfolio</a>
+
+                <h3>Certifications</h3>
+                <a href="#"><img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSueSVoS4GBqbi-NgtY4QmWo1w0B_rNrgRg6w&s">Front-End
+                    Web Development – 1Stop AI</a>
+                <a href="#"><img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSueSVoS4GBqbi-NgtY4QmWo1w0B_rNrgRg6w&s">Hands-On
+                    Web Development – Infosys</a>
+                <a href="#"><img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSueSVoS4GBqbi-NgtY4QmWo1w0B_rNrgRg6w&s">Computer
+                    Concepts – NIGT (3 months)</a>
+                <a href="#"><img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSueSVoS4GBqbi-NgtY4QmWo1w0B_rNrgRg6w&s">A
+                    Certified Web Developer -Eduonix</a>
+
+
+                <div class="discover-more-link">
+                    <!---  <a href="#">Discover More</a> -->
+                </div>
+            </div>
+            <p id="showMoreLink" onclick="toggleActivity()">Show more <b>+</b></p>
+
+        </div>
+        <div class="main-content">
+            <div class="create-post">
+                <div class="create-post-input">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <textarea rows="2" placeholder="Exploring Skills..." disabled></textarea>
+                </div>
+                <div class="create-post-links">
+                    <li><img src="https://cdn-icons-png.flaticon.com/512/10165/10165819.png">Tech</li>
+                    <li><img src="https://cdn-icons-png.freepik.com/512/4668/4668067.png">Design</li>
+                    <li><img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsxRkJLpt0fPAyI9JraxMlVTDstK5S5Sk55g&s">Innovate
+                    </li>
+                    <li>Post</li>
+                </div>
+            </div>
+            <div class="sort-by">
+                <hr>
+                <p>Keep Exploring <span>more<img src="images/down-arrow.png"></span> </p>
+
+            </div>
+
+
+
+
+
+
+
+
+            <!------ skills-->
+            <div class="post" id="home" data-aos="fade-up">
+                <div class="post-author">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <div>
+                        <h1>Skills</h1>
+                        <small>Being Updated ➚</small>
+
+                    </div>
+                </div>
+                <p> Here are the tools and technologies I work with to craft engaging digital experiences and efficient
+                    solutions.</p>
+                <div class="icon-grid-container">
+                    <!-- Existing icons -->
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/color/96/html-5.png" alt="HTML">
+                        <span>HTML</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/color/96/css3.png" alt="CSS">
+                        <span>CSS</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/color/96/javascript.png" alt="JavaScript">
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/office/96/react.png" alt="React">
+                        <span>React</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/color/96/c-programming.png" alt="C">
+                        <span>C</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/color/96/c-plus-plus-logo.png" alt="C++">
+                        <span>C++</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/color/96/figma.png" alt="Figma">
+                        <span>Figma</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/color/96/canva.png" alt="Canva">
+                        <span>Canva</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/color/96/api.png" alt="API">
+                        <span>API</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/fluency/96/microsoft-office-2019.png" alt="MS Office">
+                        <span>MS Office</span>
+                    </div>
+                    <!-- New icons -->
+                    <div class="icon-box">
+                        <img src="https://i.pinimg.com/736x/79/5e/bb/795ebb5f4a470cd7242136237f61fc53.jpg"
+                            alt="Core Java">
+                        <span>Core Java</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg69mZUb0wE8X9e2vP0kf_sYxoRCXl8R-6hQ&s"
+                            alt="SEO">
+                        <span>SEO</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://www.simplihire.com/wp-content/uploads/2023/09/ux-ui-logo.png" alt="UI/UX">
+                        <span>UI/UX</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="                  https://cdn-icons-png.flaticon.com/512/25/25231.png
+                        " alt="UI/UX">
+                        <span>GitHub</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShPUxYPVIpwZw3uF_oxEGUZFyStnHH_YAvWg&s"
+                            alt="UI/UX">
+                        <span>GSAP</span>
+                    </div>
+                    <div class="icon-box">
+                        <img src="https://images.seeklogo.com/logo-png/45/2/dsa-logo-png_seeklogo-456718.png"
+                            alt="UI/UX">
+                        <span>DSA</span>
+                    </div>
+                </div>
+
+
+                <div class="post-stats">
+
+
+                </div>
+                <div class="post-activity">
+                    <div>
+                        <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg"
+                            class="post-activity-user-icon">
+                        <img src="images/down-arrow.png" class="post-activity-arrow-icon">
+                        <div>
+                            <span>&middot; Learning More</span>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!------ skills-->
+
+            <!------Acheivement-->
+            <div class="post" data-aos="fade-up">
+                <div class="post-author">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <div>
+                        <h1 id="win">Winings</h1>
+                        <small>Being Updated ➚</small>
+
+                    </div>
+                </div>
+                <p>Winning: Achieve The goals</p>
+                <p>Participation is the first step towards the winning outcome you desire.</p>
+                <div class="icon-grid-container">
+                    <!-- Existing icons -->
+                    <div class="icon-box">
+                        <img src="container/won/Ignite 1st.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/cgcjhanjeri Ideaathon.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/InVISSION 2nd.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/inovison.png" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/project dis.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/code jam.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/news cut1.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/sceince city.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/WhatsApp Image 2025-04-22 at 11.39.51_0fac8328.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/WhatsApp Image 2025-04-22 at 11.39.52_4b5683fc.jpg" id="ach-img" alt="">
+                    </div>
+                    <!-- New icons -->
+                    <div class="icon-box">
+                        <img src="container/won/WhatsApp Image 2025-04-22 at 11.39.52_a21bb45b.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/WhatsApp Image 2025-04-22 at 11.42.55_6e9ba2ec.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/news cut 2.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/inspire award.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/state level exibhition.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/won/news cut1.jpg" id="ach-img" alt="">
+                    </div>
+                </div>
+
+
+                <div class="post-stats">
+
+
+                </div>
+                <div class="post-activity">
+                    <div>
+                        <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg"
+                            class="post-activity-user-icon">
+                        <img src="images/down-arrow.png" class="post-activity-arrow-icon">
+                        <div>
+                            <span>16 Winings &middot; 15+ Unlisted</span>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!---Achievement-->
+
+
+            <!------Acheivement-->
+            <div class="post" data-aos="fade-up">
+                <div class="post-author">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <div>
+                        <h1 id="achv">Achievements</h1>
+                        <small>Being Updated ➚</small>
+
+                    </div>
+                </div>
+                <p>Achievements: Milestones of progress, celebrated moments of success.</p>
+                <p>Participation fuels the journey towards remarkable achievements.</p>
+                <div class="icon-grid-container">
+                    <!-- Existing icons -->
+                    <div class="icon-box">
+                        <img src="container/Particepant/1742390581254.jpeg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Particepant/cgc landarn project disp.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Particepant/cgc landarn project display.jpg" id="ach-img" alt="">
+                    </div>
+
+                    <div class="icon-box">
+                        <img src="container/Particepant/cgcjhanjeriidea.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Particepant/Screenshot 2025-04-22 122614.png" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Particepant/Front-End Feasta coe.jpg" id="ach-img" alt="">
+                    </div>
+
+                    <div class="icon-box">
+                        <img src="container/Particepant/win.jpg" id="ach-img" alt="">
+                    </div>
+
+                    <div class="icon-box">
+                        <img src="container/Particepant/Ignite Pro Dis 1st.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Particepant/CGCj.jpg" id="ach-img" alt="">
+                    </div>
+
+                </div>
+
+
+                <div class="post-stats">
+
+
+                </div>
+                <div class="post-activity">
+                    <div>
+                        <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg"
+                            class="post-activity-user-icon">
+                        <img src="images/down-arrow.png" class="post-activity-arrow-icon">
+                        <div>
+                            <span>Achievements&middot; Unlocking More</span>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!---Achievement-->
+
+            <!------Acheivement-->
+            <div class="post" data-aos="fade-up">
+                <div class="post-author">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <div>
+                        <h1 id="part">Participation</h1>
+                        <small>Being Updated ➚</small>
+
+                    </div>
+                </div>
+                <p>Every participantion plays a vital role in creating something impactful.</p>
+                <div class="icon-grid-container">
+                    <!-- Existing icons -->
+                    <div class="icon-box">
+                        <img src="container/Part-certi/Certificate.png" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/code jam.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/code o byte.png" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/inovison.png" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/code101.png" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/drone workshop.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/Front-End Feasta certificate.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/IMG_20240209_183813_616@-440538184.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/IMG_20240209_183813_616@-440538184.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/innotecg Puspa Gujral science city.jpg" id="ach-img" alt="">
+                    </div>
+                    <!-- New icons -->
+                    <div class="icon-box">
+                        <img src="container/Part-certi/inovison.png" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/logo design.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/Screenshot 2025-04-21 184930.png" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/srgc 2019.jpg" id="ach-img" alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/WhatsApp Image 2025-04-22 at 11.39.52_d19dea48.jpg" id="ach-img"
+                            alt="">
+                    </div>
+                    <div class="icon-box">
+                        <img src="container/Part-certi/sceince city.jpg" id="ach-img" alt="">
+                    </div>
+                </div>
+
+
+                <div class="post-stats">
+
+
+                </div>
+                <div class="post-activity">
+                    <div>
+                        <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg"
+                            class="post-activity-user-icon">
+                        <img src="images/down-arrow.png" class="post-activity-arrow-icon">
+                        <div>
+                            <span> Participation &middot; Gaining More</span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!---Achievement-->
+
+
+
+            <!------Acheivement-->
+            <div class="post" id="projects" data-aos="fade-up">
+                <div class="post-author">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <div>
+                        <h1 id="part">Projects</h1>
+                        <small>Crafting Solutions</small>
+
+                    </div>
+                </div>
+                <p><strong> * You Have To Sign-Up To Access All Feature in This Project</strong></p>
+                <!-- From Uiverse.io by Yaya12085 -->
+                <div class="card">
+                    <div class="image"><img src="projects/projecta.png" alt=""></div>
+                    <div class="content">
+                        <a href="#">
+                            <span class="title">
+                            DineTap: Restaurant Digital Menu Manager
+                            </span>
+                        </a>
+
+                        <p class="desc">
+                            I engineered a web platform for restaurants to manage digital menus and implemented QR code
+                            generation for customers. The platform features an admin panel with live Firebase
+                            synchronization and a responsive, mobile-friendly design.
+                        </p>
+
+                        <a class="action" href="https://dinetap-pro.netlify.app/" target="_blank">
+                            Explore Project
+                            <span aria-hidden="true">
+                                →
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <div class="post-stats">
+
+
+                </div>
+                <div class="post-activity">
+                    <div>
+                        <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg"
+                            class="post-activity-user-icon">
+                        <img src="images/down-arrow.png" class="post-activity-arrow-icon">
+
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!---Achievement-->
+
+            <!------Acheivement-->
+            <div class="post" data-aos="fade-up">
+                <div class="post-author">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <div>
+                        <h1 id="part">Projects</h1>
+                        <small>Crafting Solutions</small>
+
+                    </div>
+                </div>
+                <p>Bhandara Buddy : Find nearest Bhandara</p>
+
+                <div class="card">
+                    <div class="image"><img src="projects\image.png" alt=""></div>
+                    <div class="content">
+                        <a href="#">
+                            <span class="title">
+                                Bhandara Buddy
+                            </span>
+                        </a>
+
+                        <p class="desc">
+                            Bhandara Buddy helps people find the nearest Bhandaras (free food events) and easily share
+                            them with others in need.
+                            Users can also donate excess food and list it for free pickup, ensuring zero waste and
+                            timely help.  The platform uses geolocation and radius filters to show nearby food spots with real-time
+                            updates.A secure Firebase backend handles user authentication, food listings, and pickup requests.
+                            It encourages community-driven food sharing with a clean UI, responsive design, and social
+                            impact focus
+                        </p>
+
+                        <a class="action" href="https://bhandara-buddy.netlify.app/" target="_blank">
+                            Explore Project
+                            <span aria-hidden="true">
+                                →
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <div class="post-stats">
+
+
+                </div>
+                <div class="post-activity">
+                    <div>
+                        <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg"
+                            class="post-activity-user-icon">
+                        <img src="images/down-arrow.png" class="post-activity-arrow-icon">
+
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!---Achievement-->
+
+
+
+
+
+            <div id="contactModal" class="contact-modal">
+                <div class="contact-modal-content">
+                    <span class="contact-close">&times;</span>
+                    <h2>Contact Me</h2>
+                    <form action="https://formsubmit.co/kumarsagar4977@gmail.com" method="POST">
+
+                        <!-- Optional: prevent bot spam -->
+                        <input type="hidden" name="_captcha" value="false">
+
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Your email" required>
+
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Your message..."
+                            required></textarea>
+
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+        <!---Graphs-->
+
+        <div class="right-sidebar" id="graph">
+            <div class="sidebar-news" id="graph-a">
+                <div class="chart-container" style="width: 100%; height: 100%;">
+                    <canvas id="eventLineChart" style="width: 100%; height: 100%;"></canvas>
+                </div>
+            </div>
+            <br>
+            <div class="sidebar-news" id="graph-b">
+                <div class="chart-container" style="width: 100%; height: 100%;">
+                    <canvas id="winningLineChart" style="width: 100%; height: 100%;"></canvas>
+                </div>
+            </div>
+            <br>
+
+            <div class="sidebar-useful-links">
+                <a href="#">#Web</a>
+                <a href="#">#Front-End</a>
+                <a href="#">#Technology</a>
+                <a href="#">#Skills</a>
+                <a href="#">#Achievement</a>
+                <a href="#">#Design</a>
+                <a href="#">#More</a>
+
+
+                <div class="copyright-msg">
+                    <img src="images/WhatsApp Image 2025-04-21 at 18.55.45_4793f6a3.jpg">
+                    <p>Sagar &#169; 2022. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script>
+        AOS.init();
+    </script>
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
+

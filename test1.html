@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinShield - Financial Literacy</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --danger: #e63946;
+            --success: #2a9d8f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: white;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .language-selector {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: none;
+            background-color: white;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .auth-buttons button {
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white !important;
+        }
+        
+        .register-btn {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Page Content Styles */
+        .page {
+            display: none;
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Home Page */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .cta-buttons button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .primary-btn {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .secondary-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        /* Features Grid */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        /* Finance Tools */
+        .calculator {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .calculator h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .calculate-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+        
+        /* Fraud Awareness */
+        .fraud-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--danger);
+            margin-bottom: 1.5rem;
+        }
+        
+        .fraud-card h3 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Quiz */
+        .quiz-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-question {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .quiz-options {
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-option {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .quiz-option.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .quiz-button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .quiz-button:hover {
+            background-color: var(--secondary);
+        }
+        
+        .quiz-progress {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .header-right {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons button {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" onclick="showPage('home')">FinShield</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="active" onclick="showPage('home')" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#" onclick="showPage('finance')" data-i18n="nav.finance">Finance Tools</a></li>
+                    <li><a href="#" onclick="showPage('fraud')" data-i18n="nav.fraud">Fraud Awareness</a></li>
+                    <li><a href="#" onclick="showPage('quiz')" data-i18n="nav.quiz">Fraud Quiz</a></li>
+                </ul>
+                <div class="header-right">
+                    <select class="language-selector" id="languageSelector" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी (Hindi)</option>
+                        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+                    </select>
+                    <div class="auth-buttons">
+                        <button class="login-btn" data-i18n="nav.login">Login</button>
+                        <button class="register-btn" data-i18n="nav.register">Register</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Page Content -->
+    <main class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <h1 data-i18n="home.hero.title">Empower Your Financial Future</h1>
+                <p data-i18n="home.hero.subtitle">Learn essential money management skills and protect yourself from financial fraud with our interactive educational platform.</p>
+                <div class="cta-buttons">
+                    <button class="primary-btn" onclick="showPage('finance')" data-i18n="home.cta.learn">Start Learning</button>
+                    <button class="secondary-btn" onclick="showPage('quiz')" data-i18n="home.cta.quiz">Take Fraud Quiz</button>
+                </div>
+            </section>
+            
+            <section class="features">
+                <div class="section-title">
+                    <h2 data-i18n="home.features.title">Financial Literacy Modules</h2>
+                    <p data-i18n="home.features.subtitle">Master your personal finances with our interactive lessons</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card" onclick="showPage('finance', 'budgeting')">
+                        <div class="feature-icon">💰</div>
+                        <h3 data-i18n="home.features.budgeting.title">Budgeting Basics</h3>
+                        <p data-i18n="home.features.budgeting.desc">Learn how to create and stick to a budget that works for your lifestyle and financial goals.</p>
+                    </div>
+                    <div class="feature-card" onclick="showPage('finance', 'saving')">
+                        <div class="feature-icon">🏦</div>
+                        <h3 data-i18n="home.features.saving.title">Saving Strategies</h3>
+                        <p data-i18n="home.features.saving.desc">Discover techniques to grow your savings effectively and build financial security.</p>
+                    </div>
+                    <div class="feature-card" onclick="showPage('finance', 'investment')">
+                        <div class="feature-icon">📈</div>
+                        <h3 data-i18n="home.features.investment.title">Investment Fundamentals</h3>
+                        <p data-i18n="home.features.investment.desc">Understand different investment options and how to make your money work for you.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Finance Tools Page -->
+        <div id="finance" class="page">
+            <div class="section-title">
+                <h2 data-i18n="finance.title">Financial Tools</h2>
+                <p data-i18n="finance.subtitle">Practical calculators to help you manage your money</p>
+            </div>
+            
+            <div class="calculator">
+                <h3 data-i18n="finance.calculators.retirement.title">Retirement Calculator</h3>
+                <div class="form-group">
+                    <label for="currentAge" data-i18n="finance.calculators.retirement.currentAge">Current Age</label>
+                    <input type="number" id="currentAge" min="18" max="100" value="30">
+                </div>
+                <div class="form-group">
+                    <label for="retirementAge" data-i18n="finance.calculators.retirement.retirementAge">Retirement Age</label>
+                    <input type="number" id="retirementAge" min="40" max="100" value="65">
+                </div>
+                <div class="form-group">
+                    <label for="monthlySavings" data-i18n="finance.calculators.retirement.monthlySavings">Monthly Savings (₹)</label>
+                    <input type="number" id="monthlySavings" min="1000" value="5000">
+                </div>
+                <div class="form-group">
+                    <label for="expectedReturns" data-i18n="finance.calculators.retirement.expectedReturns">Expected Annual Returns (%)</label>
+                    <input type="number" id="expectedReturns" min="1" max="20" step="0.1" value="8">
+                </div>
+                <button class="calculate-btn" onclick="calculateRetirement()" data-i18n="finance.calculators.calculate">Calculate</button>
+                <div class="result" id="retirementResult"></div>
+            </div>
+            
+            <div class="calculator" style="margin-top: 3rem;">
+                <h3 data-i18n="finance.calculators.emi.title">EMI Calculator</h3>
+                <div class="form-group">
+                    <label for="loanAmount" data-i18n="finance.calculators.emi.loanAmount">Loan Amount (₹)</label>
+                    <input type="number" id="loanAmount" min="10000" value="500000">
+                </div>
+                <div class="form-group">
+                    <label for="interestRate" data-i18n="finance.calculators.emi.interestRate">Interest Rate (%)</label>
+                    <input type="number" id="interestRate" min="1" max="20" step="0.1" value="8.5">
+                </div>
+                <div class="form-group">
+                    <label for="loanTenure" data-i18n="finance.calculators.emi.loanTenure">Loan Tenure (Years)</label>
+                    <input type="number" id="loanTenure" min="1" max="30" value="15">
+                </div>
+                <button class="calculate-btn" onclick="calculateEMI()" data-i18n="finance.calculators.calculate">Calculate</button>
+                <div class="result" id="emiResult"></div>
+            </div>
+        </div>
+        
+        <!-- Fraud Awareness Page -->
+        <div id="fraud" class="page">
+            <div class="section-title">
+                <h2 data-i18n="fraud.title">Fraud Awareness</h2>
+                <p data-i18n="fraud.subtitle">Learn to recognize and protect yourself from financial scams</p>
+            </div>
+            
+            <div class="fraud-card">
+                <h3 data-i18n="fraud.types.phishing.title">Phishing Scams</h3>
+                <p data-i18n="fraud.types.phishing.desc">Fraudulent attempts to obtain sensitive information by pretending to be a trustworthy entity in electronic communication.</p>
+                <p style="margin-top: 1rem;" data-i18n="fraud.types.phishing.tips"><strong>How to protect yourself:</strong> Never click on links in unsolicited emails, always verify the sender's address, and never provide personal information via email.</p>
+            </div>
+            
+            <div class="fraud-card">
+                <h3 data-i18n="fraud.types.ponzi.title">Ponzi Schemes</h3>
+                <p data-i18n="fraud.types.ponzi.desc">Fraudulent investment operations where returns are paid to earlier investors using the capital of newer investors.</p>
+                <p style="margin-top: 1rem;" data-i18n="fraud.types.ponzi.tips"><strong>Red flags:</strong> Promises of high returns with little risk, overly consistent returns, unlicensed sellers, secretive strategies, and difficulty receiving payments.</p>
+            </div>
+            
+            <div class="fraud-card">
+                <h3 data-i18n="fraud.types.identity.title">Identity Theft</h3>
+                <p data-i18n="fraud.types.identity.desc">When someone steals your personal information to commit fraud, such as opening accounts or making purchases in your name.</p>
+                <p style="margin-top: 1rem;" data-i18n="fraud.types.identity.tips"><strong>Prevention:</strong> Shred documents with personal information, use strong passwords, monitor your credit reports, and be cautious with sharing personal data online.</p>
+            </div>
+        </div>
+        
+        <!-- Quiz Page -->
+        <div id="quiz" class="page">
+            <div class="section-title">
+                <h2 data-i18n="quiz.title">Fraud Awareness Quiz</h2>
+                <p data-i18n="quiz.subtitle">Test your knowledge about financial scams</p>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-progress" id="quizProgress" data-i18n="quiz.progress">Question 1 of 5</div>
+                <div class="quiz-question" id="quizQuestion"></div>
+                <div class="quiz-options" id="quizOptions"></div>
+                <button class="quiz-button" id="quizButton" onclick="nextQuestion()" data-i18n="quiz.next">Next Question</button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" onclick="showPage('home')">FinShield</div>
+            <p data-i18n="footer.tagline">Your trusted partner in financial education and fraud prevention</p>
+            <ul class="footer-links">
+                <li><a href="#" onclick="showPage('home')" data-i18n="footer.home">Home</a></li>
+                <li><a href="#" onclick="showPage('finance')" data-i18n="footer.finance">Finance Tools</a></li>
+                <li><a href="#" onclick="showPage('fraud')" data-i18n="footer.fraud">Fraud Awareness</a></li>
+                <li><a href="#" onclick="showPage('quiz')" data-i18n="footer.quiz">Quiz</a></li>
+                <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
+                <li><a href="#" data-i18n="footer.terms">Terms of Service</a></li>
+                <li><a href="#" data-i18n="footer.contact">Contact Us</a></li>
+            </ul>
+            <div class="copyright" data-i18n="footer.copyright">© 2023 FinShield. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Support
+        const translations = {
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.finance": "Finance Tools",
+                "nav.fraud": "Fraud Awareness",
+                "nav.quiz": "Fraud Quiz",
+                "nav.login": "Login",
+                "nav.register": "Register",
+                
+                // Home Page
+                "home.hero.title": "Empower Your Financial Future",
+                "home.hero.subtitle": "Learn essential money management skills and protect yourself from financial fraud with our interactive educational platform.",
+                "home.cta.learn": "Start Learning",
+                "home.cta.quiz": "Take Fraud Quiz",
+                "home.features.title": "Financial Literacy Modules",
+                "home.features.subtitle": "Master your personal finances with our interactive lessons",
+                "home.features.budgeting.title": "Budgeting Basics",
+                "home.features.budgeting.desc": "Learn how to create and stick to a budget that works for your lifestyle and financial goals.",
+                "home.features.saving.title": "Saving Strategies",
+                "home.features.saving.desc": "Discover techniques to grow your savings effectively and build financial security.",
+                "home.features.investment.title": "Investment Fundamentals",
+                "home.features.investment.desc": "Understand different investment options and how to make your money work for you.",
+                
+                // Finance Tools
+                "finance.title": "Financial Tools",
+                "finance.subtitle": "Practical calculators to help you manage your money",
+                "finance.calculators.calculate": "Calculate",
+                "finance.calculators.retirement.title": "Retirement Calculator",
+                "finance.calculators.retirement.currentAge": "Current Age",
+                "finance.calculators.retirement.retirementAge": "Retirement Age",
+                "finance.calculators.retirement.monthlySavings": "Monthly Savings (₹)",
+                "finance.calculators.retirement.expectedReturns": "Expected Annual Returns (%)",
+                "finance.calculators.emi.title": "EMI Calculator",
+                "finance.calculators.emi.loanAmount": "Loan Amount (₹)",
+                "finance.calculators.emi.interestRate": "Interest Rate (%)",
+                "finance.calculators.emi.loanTenure": "Loan Tenure (Years)",
+                
+                // Fraud Awareness
+                "fraud.title": "Fraud Awareness",
+                "fraud.subtitle": "Learn to recognize and protect yourself from financial scams",
+                "fraud.types.phishing.title": "Phishing Scams",
+                "fraud.types.phishing.desc": "Fraudulent attempts to obtain sensitive information by pretending to be a trustworthy entity in electronic communication.",
+                "fraud.types.phishing.tips": "<strong>How to protect yourself:</strong> Never click on links in unsolicited emails, always verify the sender's address, and never provide personal information via email.",
+                "fraud.types.ponzi.title": "Ponzi Schemes",
+                "fraud.types.ponzi.desc": "Fraudulent investment operations where returns are paid to earlier investors using the capital of newer investors.",
+                "fraud.types.ponzi.tips": "<strong>Red flags:</strong> Promises of high returns with little risk, overly consistent returns, unlicensed sellers, secretive strategies, and difficulty receiving payments.",
+                "fraud.types.identity.title": "Identity Theft",
+                "fraud.types.identity.desc": "When someone steals your personal information to commit fraud, such as opening accounts or making purchases in your name.",
+                "fraud.types.identity.tips": "<strong>Prevention:</strong> Shred documents with personal information, use strong passwords, monitor your credit reports, and be cautious with sharing personal data online.",
+                
+                // Quiz
+                "quiz.title": "Fraud Awareness Quiz",
+                "quiz.subtitle": "Test your knowledge about financial scams",
+                "quiz.progress": "Question 1 of 5",
+                "quiz.next": "Next Question",
+                "quiz.questions": [
+                    {
+                        "question": "What should you do if you receive an email asking for your banking details from what appears to be your bank?",
+                        "options": [
+                            "Reply with the requested information",
+                            "Click on any links in the email to verify",
+                            "Contact your bank directly using their official number",
+                            "Forward the email to all your contacts to warn them"
+                        ],
+                        "correct": 2
+                    },
+                    {
+                        "question": "Which of these is a red flag for a potential Ponzi scheme?",
+                        "options": [
+                            "Consistent returns regardless of market conditions",
+                            "Investments in government bonds",
+                            "Transparent fee structure",
+                            "Registered with financial regulators"
+                        ],
+                        "correct": 0
+                    },
+                    {
+                        "question": "What's the safest way to protect yourself from identity theft?",
+                        "options": [
+                            "Share your personal information only with people you meet in person",
+                            "Use the same password for all your accounts",
+                            "Regularly check your credit reports",
+                            "Carry your Social Security card in your wallet"
+                        ],
+                        "correct": 2
+                    }
+                ],
+                
+                // Footer
+                "footer.tagline": "Your trusted partner in financial education and fraud prevention",
+                "footer.home": "Home",
+                "footer.finance": "Finance Tools",
+                "footer.fraud": "Fraud Awareness",
+                "footer.quiz": "Quiz",
+                "footer.privacy": "Privacy Policy",
+                "footer.terms": "Terms of Service",
+                "footer.contact": "Contact Us",
+                "footer.copyright": "© 2023 FinShield. All rights reserved."
+            },
+            hi: {
+                // Navigation
+                "nav.home": "होम",
+                "nav.finance": "वित्तीय उपकरण",
+                "nav.fraud": "धोखाधड़ी जागरूकता",
+                "nav.quiz": "धोखाधड़ी प्रश्नोत्तरी",
+                "nav.login": "लॉग इन",
+                "nav.register": "पंजीकरण",
+                
+                // Home Page
+                "home.hero.title": "अपने वित्तीय भविष्य को सशक्त बनाएं",
+                "home.hero.subtitle": "हमारे इंटरैक्टिव शैक्षिक प्लेटफॉर्म के साथ आवश्यक धन प्रबंधन कौशल सीखें और वित्तीय धोखाधड़ी से खुद को बचाएं।",
+                "home.cta.learn": "सीखना शुरू करें",
+                "home.cta.quiz": "धोखाधड़ी प्रश्नोत्तरी लें",
+                "home.features.title": "वित्तीय साक्षरता मॉड्यूल",
+                "home.features.subtitle": "हमारे इंटरैक्टिव पाठों के साथ अपने व्यक्तिगत वित्त में महारत हासिल करें",
+                "home.features.budgeting.title": "बजट बनाने की मूल बातें",
+                "home.features.budgeting.desc": "सीखें कि अपनी जीवनशैली और वित्तीय लक्ष्यों के लिए काम करने वाला बजट कैसे बनाएं और उस पर टिके रहें।",
+                "home.features.saving.title": "बचत रणनीतियाँ",
+                "home.features.saving.desc": "अपनी बचत को प्रभावी ढंग से बढ़ाने और वित्तीय सुरक्षा बनाने की तकनीकें खोजें।",
+                "home.features.investment.title": "निवेश की मूल बातें",
+                "home.features.investment.desc": "विभिन्न निवेश विकल्पों को समझें और अपने पैसे को अपने लिए काम करने का तरीका जानें।",
+                
+                // Finance Tools
+                "finance.title": "वित्तीय उपकरण",
+                "finance.subtitle": "आपके पैसे को प्रबंधित करने में मदद करने के लिए व्यावहारिक कैलकुलेटर",
+                "finance.calculators.calculate": "गणना करें",
+                "finance.calculators.retirement.title": "रिटायरमेंट कैलकुलेटर",
+                "finance.calculators.retirement.currentAge": "वर्तमान आयु",
+                "finance.calculators.retirement.retirementAge": "सेवानिवृत्ति की आयु",
+                "finance.calculators.retirement.monthlySavings": "मासिक बचत (₹)",
+                "finance.calculators.retirement.expectedReturns": "अपेक्षित वार्षिक रिटर्न (%)",
+                "finance.calculators.emi.title": "ईएमआई कैलकुलेटर",
+                "finance.calculators.emi.loanAmount": "ऋण राशि (₹)",
+                "finance.calculators.emi.interestRate": "ब्याज दर (%)",
+                "finance.calculators.emi.loanTenure": "ऋण अवधि (वर्ष)",
+                
+                // Fraud Awareness
+                "fraud.title": "धोखाधड़ी जागरूकता",
+                "fraud.subtitle": "वित्तीय घोटालों को पहचानना और खुद को बचाना सीखें",
+                "fraud.types.phishing.title": "फिशिंग घोटाले",
+                "fraud.types.phishing.desc": "इलेक्ट्रॉनिक संचार में एक विश्वसनीय संस्था का नाटक करके संवेदनशील जानकारी प्राप्त करने के धोखाधड़ी प्रयास।",
+                "fraud.types.phishing.tips": "<strong>खुद को कैसे बचाएं:</strong> अनचाहे ईमेल में लिंक पर कभी क्लिक न करें, हमेशा भेजने वाले के पते को सत्यापित करें, और ईमेल के माध्यम से व्यक्तिगत जानकारी कभी न दें।",
+                "fraud.types.ponzi.title": "पोंजी स्कीम",
+                "fraud.types.ponzi.desc": "धोखाधड़ी वाले निवेश संचालन जहां रिटर्न नए निवेशकों की पूंजी का उपयोग करके पहले के निवेशकों को भुगतान किया जाता है।",
+                "fraud.types.ponzi.tips": "<strong>लाल झंडे:</strong> कम जोखिम के साथ उच्च रिटर्न का वादा, बाजार की स्थितियों की परवाह किए बिना अत्यधिक सुसंगत रिटर्न, बिना लाइसेंस विक्रेता, गोपनीय रणनीतियाँ, और भुगतान प्राप्त करने में कठिनाई।",
+                "fraud.types.identity.title": "पहचान की चोरी",
+                "fraud.types.identity.desc": "जब कोई आपके नाम पर खाते खोलने या खरीदारी करने जैसी धोखाधड़ी करने के लिए आपकी व्यक्तिगत जानकारी चुराता है।",
+                "fraud.types.identity.tips": "<strong>रोकथाम:</strong> व्यक्तिगत जानकारी वाले दस्तावेजों को काटकर नष्ट करें, मजबूत पासवर्ड का उपयोग करें, अपनी क्रेडिट रिपोर्ट की निगरानी करें, और व्यक्तिगत डेटा को ऑनलाइन साझा करने में सावधानी बरतें।",
+                
+                // Quiz
+                "quiz.title": "धोखाधड़ी जागरूकता प्रश्नोत्तरी",
+                "quiz.subtitle": "वित्तीय घोटालों के बारे में अपने ज्ञान का परी
